@@ -4,6 +4,16 @@ export class InitialMigration1630000000000 implements MigrationInterface {
     name = 'InitialMigration1630000000000'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
+        // Create database if it doesn't exist
+        await queryRunner.query(`
+            DO $$ 
+            BEGIN
+                IF NOT EXISTS (SELECT FROM pg_database WHERE datname = 'student_learning_dev') THEN
+                    CREATE DATABASE student_learning_dev;
+                END IF;
+            END $$;
+        `);
+
         // Create students table
         await queryRunner.query(`
             CREATE TABLE "students" (
