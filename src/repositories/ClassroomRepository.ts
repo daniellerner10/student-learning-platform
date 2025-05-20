@@ -1,10 +1,8 @@
-import { Repository, Between } from "typeorm";
+import { Repository, Between, DataSource } from "typeorm";
 import { Classroom } from "../entities/Classroom";
-import { AppDataSource } from "../data-source";
 
-export class ClassroomRepository extends Repository<Classroom> {
-    constructor() {
-        super(Classroom, AppDataSource.manager);
+export class ClassroomRepository extends Repository<Classroom> {    constructor(dataSource: DataSource) {
+        super(Classroom, dataSource.manager);
     }
 
     async findByInstructor(instructorId: string): Promise<Classroom[]> {

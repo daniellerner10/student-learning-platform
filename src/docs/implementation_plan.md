@@ -1,6 +1,19 @@
 # Implementation Plan: Student Learning Platform
 
-This document outlines the step-by-step implementation plan for building the Student Learning Platform according to the specifications.
+This document outlines the step-by-step implementation plan for building the Student Learning Platform according to the specifications and following the global development rules.
+
+## Global Development Guidelines
+- After making changes, ALWAYS start a new server for testing
+- Iterate on existing code instead of creating new code
+- Maintain existing patterns before attempting changes
+- Kill all related servers before starting a new one
+- Prefer simple solutions and avoid code duplication
+- Write environment-aware code (dev, test, prod)
+- Only make requested or well-understood changes
+- Fix issues using existing patterns before introducing new ones
+- Keep files under 300 lines - refactor when necessary
+- No mocking data for dev or prod environments
+- Focus only on code relevant to the task
 
 ## Phase 1: Project Setup and Infrastructure
 
@@ -18,6 +31,7 @@ This document outlines the step-by-step implementation plan for building the Stu
    - [ ] Configure version control (Git repository)
    - [ ] Set up dependency management with npm/yarn
    - [ ] Create environment configuration files
+   - [ ] Ensure no file exceeds 300 lines of code
 
 3. **Database Configuration**
    - [ ] Set up PostgreSQL database for development
@@ -44,6 +58,7 @@ This document outlines the step-by-step implementation plan for building the Stu
    - [ ] Implement Hebrew calendar integration
    - [ ] Create Bar Mitzvah countdown calculation logic
    - [ ] Set up TypeORM repository for Student entity
+   - [ ] Ensure code reuse where possible for similar functionality
 
 6. **Document Entity**
    - [ ] Create TypeScript interface and TypeORM entity for Document model
@@ -75,6 +90,7 @@ This document outlines the step-by-step implementation plan for building the Stu
    - [ ] Set up route structure and controllers
    - [ ] Implement error handling middleware
    - [ ] Create response standardization
+   - [ ] Ensure controllers are modular and under 300 lines
 
 10. **Authentication Endpoints**
     - [ ] Implement registration endpoint
@@ -119,6 +135,7 @@ This document outlines the step-by-step implementation plan for building the Stu
     - [ ] Set up full-text search capabilities with TypeORM
     - [ ] Create search endpoints for documents and classrooms
     - [ ] Implement type-safe search parameters
+    - [ ] Reuse existing code patterns for search implementation
 
 16. **Analytics System**
     - [ ] Implement tracking for login frequency
@@ -132,6 +149,7 @@ This document outlines the step-by-step implementation plan for building the Stu
     - [ ] Ensure responsive data payloads
     - [ ] Implement efficient authentication for mobile
     - [ ] Create mobile-specific TypeScript interfaces if needed
+    - [ ] Reuse existing API patterns where possible
 
 ## Phase 5: Security and Performance
 
@@ -141,6 +159,7 @@ This document outlines the step-by-step implementation plan for building the Stu
     - [ ] Create rate limiting system
     - [ ] Set up audit logging for sensitive operations
     - [ ] Implement TypeScript-based validation with class-validator
+    - [ ] Ensure security patterns are consistent across the application
 
 19. **Performance Optimization**
     - [ ] Implement database query optimization
@@ -148,6 +167,7 @@ This document outlines the step-by-step implementation plan for building the Stu
     - [ ] Create pagination for list endpoints
     - [ ] Implement error handling for peak loads
     - [ ] Use TypeScript generics for reusable pagination components
+    - [ ] Ensure optimizations don't introduce unnecessary complexity
 
 ## Phase 6: Testing and Documentation
 
@@ -158,6 +178,7 @@ This document outlines the step-by-step implementation plan for building the Stu
     - [ ] Perform security testing
     - [ ] Conduct performance and load testing (200 concurrent users)
     - [ ] Implement type-safe test fixtures and mocks
+    - [ ] Ensure mocking is only used for tests, never for dev/prod
 
 21. **Documentation**
     - [ ] Generate API documentation with Swagger/OpenAPI and TypeScript
@@ -165,6 +186,7 @@ This document outlines the step-by-step implementation plan for building the Stu
     - [ ] Document error codes and responses
     - [ ] Prepare technical documentation for developers
     - [ ] Document TypeScript interfaces and types
+    - [ ] Keep documentation clean and organized
 
 ## Phase 7: Deployment and Monitoring
 
@@ -174,6 +196,7 @@ This document outlines the step-by-step implementation plan for building the Stu
     - [ ] Create deployment scripts for different environments
     - [ ] Implement database backup procedures
     - [ ] Configure TypeScript build optimization for production
+    - [ ] Ensure all servers are properly shut down before starting new ones
 
 23. **Monitoring System**
     - [ ] Set up request/response logging
@@ -190,6 +213,9 @@ This document outlines the step-by-step implementation plan for building the Stu
     - [ ] Fix identified issues and bugs
     - [ ] Optimize based on testing results
     - [ ] Verify TypeScript type safety across the application
+    - [ ] Ensure no file exceeds 300 lines of code
+    - [ ] Verify no code duplication exists
+    - [ ] Check that all code follows established patterns
 
 25. **Launch Preparation**
     - [ ] Finalize production environment
@@ -197,3 +223,5 @@ This document outlines the step-by-step implementation plan for building the Stu
     - [ ] Create rollback plan
     - [ ] Schedule maintenance windows
     - [ ] Ensure production TypeScript build is optimized
+    - [ ] Verify all servers are properly configured
+    - [ ] Create a server startup/shutdown procedure document

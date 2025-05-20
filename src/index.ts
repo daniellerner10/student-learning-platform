@@ -10,11 +10,12 @@ import swaggerUi from 'swagger-ui-express';
 import { AppDataSource } from './data-source';
 import { errorHandler } from './middleware/errorHandler';
 import { authRoutes } from './api/routes/auth';
-import { studentRoutes } from './api/routes/student';
-import { documentRoutes } from './api/routes/document';
-import { classroomRoutes } from './api/routes/classroom';
-import { permissionRoutes } from './api/routes/permission';
+import studentRoutes from './api/routes/student';
+import documentRoutes from './api/routes/document';
+import classroomRoutes from './api/routes/classroom';
+import permissionRoutes from './api/routes/permission';
 import { swaggerSpec } from './config/swagger';
+import logger from './utils/logger';
 
 const app = express();
 const PORT = parseInt(process.env.PORT || '3000', 10);
@@ -28,7 +29,7 @@ app.use(helmet({
 }));
 app.use(express.json());
 
-// Swagger UI
+// Swagger documentation
 app.use('/api-docs', swaggerUi.serve);
 app.get('/api-docs', swaggerUi.setup(swaggerSpec, {
     explorer: true,
@@ -49,13 +50,13 @@ app.use(errorHandler);
 // Database connection and server start
 AppDataSource.initialize()
     .then(() => {
-        console.log('Database connected successfully');
+        logger.info('Database connection established');
         
         if (isDevelopment) {
             // In development, use HTTP
             http.createServer(app).listen(DEV_PORT, () => {
-                console.log(`HTTP Server is running on port ${DEV_PORT}`);
-                console.log(`Swagger documentation available at http://localhost:${DEV_PORT}/api-docs`);
+                logger.info(`HTTP Server is running on port ${DEV_PORT}`);
+                logger.info(`Swagger documentation available at http://localhost:${DEV_PORT}/api-docs`);
             });
         } else {
             // In production, use HTTPS
@@ -65,14 +66,14 @@ AppDataSource.initialize()
                     cert: fs.readFileSync(path.join(__dirname, '../ssl/certificate.crt'))
                 };
                 https.createServer(sslOptions, app).listen(PORT, () => {
-                    console.log(`HTTPS Server is running on port ${PORT}`);
+                    logger.info(`HTTPS Server is running on port ${PORT}`);
                 });
             } catch (error) {
-                console.error('Error loading SSL certificates:', error);
+                logger.error('Error loading SSL certificates:', error);
                 process.exit(1);
             }
         }
     })
     .catch((error) => {
-        console.error('Error during Data Source initialization:', error);
+        logger.error('Error during Data Source initialization:', error);
     });

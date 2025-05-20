@@ -1,10 +1,9 @@
-import { Repository } from "typeorm";
+import { Repository, DataSource } from "typeorm";
 import { Document } from "../entities/Document";
-import { AppDataSource } from "../data-source";
 
 export class DocumentRepository extends Repository<Document> {
-    constructor() {
-        super(Document, AppDataSource.manager);
+    constructor(dataSource: DataSource) {
+        super(Document, dataSource.manager);
     }
 
     async findByOwner(ownerId: string): Promise<Document[]> {

@@ -1,10 +1,9 @@
-import { Repository } from "typeorm";
+import { Repository, DataSource } from "typeorm";
 import { Student } from "../entities/Student";
-import { AppDataSource } from "../data-source";
 
 export class StudentRepository extends Repository<Student> {
-    constructor() {
-        super(Student, AppDataSource.manager);
+    constructor(dataSource: DataSource) {
+        super(Student, dataSource.manager);
     }
 
     async findByEmail(email: string): Promise<Student | undefined> {

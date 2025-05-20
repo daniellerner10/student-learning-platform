@@ -34,13 +34,21 @@ npm install
 3. Set up environment variables:
 Create a `.env` file in the root directory with the following variables:
 ```
+# Server Configuration
 NODE_ENV=development
 PORT=3001
+
+# Database Configuration
 DB_HOST=localhost
 DB_PORT=5432
 DB_USERNAME=your_username
 DB_PASSWORD=your_password
 DB_DATABASE=student_learning_dev
+
+# Git Configuration
+GIT_USER_NAME=your_name
+GIT_USER_EMAIL=your_email@example.com
+GIT_REPOSITORY_URL=your_repository_url
 ```
 
 4. Run database migrations:

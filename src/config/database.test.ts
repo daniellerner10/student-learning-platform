@@ -1,13 +1,14 @@
-export default {
-  type: "postgres",
-  host: "localhost",
-  port: 5432,
-  username: "postgres",
-  password: "test_password",
-  database: "student_learning_test",
-  synchronize: true,
-  logging: false,
-  entities: ["src/entities/*.ts"],
-  migrations: ["src/migrations/*.ts"],
-  subscribers: [],
-}; 
+import { DataSource } from 'typeorm';
+import { Student } from '../entities/Student';
+import { Document } from '../entities/Document';
+import { Classroom } from '../entities/Classroom';
+import { Permission } from '../entities/Permission';
+
+export const TestDataSource = new DataSource({
+    type: 'sqlite',
+    database: ':memory:',
+    dropSchema: true,
+    synchronize: true,
+    entities: [Student, Document, Classroom, Permission],
+    logging: false
+}); 

@@ -1,8 +1,9 @@
 import { Router } from 'express';
 import { StudentRepository } from '../../repositories/StudentRepository';
+import { AppDataSource } from '../../data-source';
 
 const router = Router();
-const studentRepository = new StudentRepository();
+const studentRepository = new StudentRepository(AppDataSource);
 
 /**
  * @swagger

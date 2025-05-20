@@ -7,12 +7,14 @@
     "start": "node dist/index.js",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "build": "tsc",
-    "typeorm": "typeorm-ts-node-commonjs",
-    "migration:generate": "npm run typeorm migration:generate -- -d src/data-source.ts",
-    "migration:run": "npm run typeorm migration:run -- -d src/data-source.ts",
-    "migration:revert": "npm run typeorm migration:revert -- -d src/data-source.ts",
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
+    "migration:generate": "npm run typeorm migration:generate -- -d src/data-source.ts src/migrations/GeneratedMigration",
+    "migration:run": "npm run typeorm migration:run -d src/data-source.ts",
+    "migration:revert": "npm run typeorm migration:revert -d src/data-source.ts",
     "generate-ssl": "node scripts/generate-ssl.js",
-    "install-certificate": "node scripts/install-certificate.js"
+    "install-cert": "node scripts/install-certificate.js",
+    "test": "jest",
+    "setup:git": "ts-node scripts/setup-git.ts"
   },
   "keywords": [
     "education",
@@ -24,6 +26,7 @@
   "dependencies": {
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.8",
+    "@types/winston": "^2.4.4",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
@@ -35,15 +38,20 @@
     "reflect-metadata": "^0.1.13",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
-    "typeorm": "^0.3.15"
+    "typeorm": "^0.3.15",
+    "winston": "^3.17.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.22",
+    "@types/jest": "^29.5.14",
     "@types/jsonwebtoken": "^9.0.1",
     "@types/node": "^18.15.11",
     "@types/pg": "^8.6.6",
+    "jest": "^29.7.0",
+    "sqlite3": "^5.1.7",
+    "ts-jest": "^29.3.4",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.0.4"
   }

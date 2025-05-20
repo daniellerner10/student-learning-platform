@@ -1,10 +1,9 @@
-import { Repository, LessThan, IsNull } from "typeorm";
+import { Repository, LessThan, IsNull, DataSource } from "typeorm";
 import { Permission } from "../entities/Permission";
-import { AppDataSource } from "../data-source";
 
 export class PermissionRepository extends Repository<Permission> {
-    constructor() {
-        super(Permission, AppDataSource.manager);
+    constructor(dataSource: DataSource) {
+        super(Permission, dataSource.manager);
     }
 
     async findActivePermissions(studentId: string): Promise<Permission[]> {
